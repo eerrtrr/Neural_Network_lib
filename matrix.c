@@ -65,3 +65,32 @@ void printMatrix(matrix* m){
 		printf("\n");
 	}
 }
+
+
+bool sameNumOfRow(matrix* a, matrix* b){
+	return (a->row == b->row);
+}
+
+bool sameNumOfColumn(matrix* a, matrix* b){
+	return(a->column == b->column);
+}
+
+bool mulCompatibility(matrix* a, matrix* b){
+	return(a->column == b->row);	
+}
+
+
+void addMatrix(matrix* a, matrix* b, ...){
+	va_list ap;
+	va_start(ap, b);
+
+	if(va_arg(ap, matrix*) == NULL){
+		printf("yes\n");
+	}
+
+	else{
+		printf("no\n");
+	}
+
+	va_end(ap);
+}
