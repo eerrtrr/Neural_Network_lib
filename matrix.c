@@ -11,25 +11,57 @@ matrix* initializeMatrix(unsigned int row,unsigned int column){
 
 	m->row = row;	m->column = column;
 	
-	m->data = malloc(row * sizeof(float));
-  	for (int i=0; i<row; i++){
-   		m->data[i] = malloc(column*sizeof(float));
-
-   		for(int k=0; k<column; k++){
-			m->data[i][k] = 0.0;
-		}
+	m->data = (float **)malloc(row * sizeof(float *));
+  	for(int i=0; i<row; i++){
+   		m->data[i] = (float *)malloc(column*sizeof(float));
   	}
 
 	return m;
 }
 
+
+void deleteMatrix(matrix *m){
+	if(m == NULL){
+		printf("The matrix is NULL\n");
+		exit(EXIT_FAILURE);
+	}
+
+	for(int i=0; i<m->row; i++){
+		free(m->data[i]);
+		m->data[i] = NULL;
+	}
+
+	free(m->data);
+	free(m);
+
+	m = NULL;
+}
+
+
+
+void randomizeMatrix(matrix* m){
+	time_t t;
+   	srand((unsigned) time(&t));
+
+   	for(int i=0; i<m->row; i++){
+   		for(int k=0; k<m->column; k++){
+    		m->data[i][k] = ((float)rand()/(float)(RAND_MAX))*2 -1;
+   		}
+   	}
+}
+
+
 void printMatrix(matrix* m){
-	printf("Matrix %ix%i\n", m->row, m-> column);
+	if(m == NULL){
+		printf("The matrix is NULL\n");
+		exit(EXIT_FAILURE);
+	}
+
+	printf("Matrix %p %ix%i\n", m, m->row, m-> column);
 	for(int i=0; i<m->row; i++){
 		for(int k=0; k<m->column; k++){
 			printf("%f ", m->data[i][k]);
 		}
-
 		printf("\n");
 	}
 }

@@ -10,5 +10,6 @@ neuralNetwork.o : neuralNetwork.c neuralNetwork.h matrix.h
 matrix.o : matrix.c matrix.h
 	gcc -c -Wall matrix.c
 	
-
+rm :
+	rm *.o
 
