@@ -45,9 +45,11 @@ void randomizeMatrix(matrix* m){
 
    	for(int i=0; i<m->row; i++){
    		for(int k=0; k<m->column; k++){
-    		m->data[i][k] = ((float)rand()/(float)(RAND_MAX))*2 -1;
+    		m->data[i][k] = (float)(rand()%101)/50 -1;
    		}
    	}
+
+   	sleep(1);
 }
 
 
@@ -80,17 +82,58 @@ bool mulCompatibility(matrix* a, matrix* b){
 }
 
 
-void addMatrix(matrix* a, matrix* b, ...){
-	va_list ap;
-	va_start(ap, b);
+void addMatrix(matrix* a, matrix* b, matrix* res){
 
-	if(va_arg(ap, matrix*) == NULL){
-		printf("yes\n");
+	if(res == NULL){
+		if(sameNumOfColumn(a, b) && sameNumOfRow(a, b)){
+			for(int i=0; i<a->row; i++){
+   				for(int k=0; k<a->column; k++){
+    				a->data[i][k] = a->data[i][k] + b->data[i][k];
+   				}
+  		 	}
+		}
+
+		else{
+			printf("Number of rows and columns must match\n");
+			exit(EXIT_FAILURE);
+		}
 	}
 
 	else{
-		printf("no\n");
+		if(sameNumOfColumn(a, b) && sameNumOfRow(a, b) && sameNumOfColumn(a, res) && sameNumOfRow(a, res)){
+			for(int i=0; i<a->row; i++){
+   				for(int k=0; k<a->column; k++){
+    				res->data[i][k] = a->data[i][k] + b->data[i][k];
+   				}
+  		 	}
+		}
+
+		else{
+			printf("Number of rows and columns must match\n");
+			exit(EXIT_FAILURE);
+		}
+	}
+}
+
+
+matrix* mulMatrix(matrix* a, matrix* b){
+	matrix* res = initializeMatrix(a->row, b->column);
+	if(mulCompatibility(a, b)){
+		for(int i=0; i<a->row; i++){
+   			for(int k=0; k<b->column; k++){
+   				float sum = 0;
+   				for(int u=0; u<a->column; u++){
+    				sum += a->data[i][u]*b->data[u][k];
+    			}
+    			res->data[i][k] = sum;
+    		}   			
+  		}
 	}
 
-	va_end(ap);
+	else{
+		printf("Number of rows and columns must match\n");
+		exit(EXIT_FAILURE);
+	}
+
+	return res;
 }

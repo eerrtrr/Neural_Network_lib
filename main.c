@@ -1,21 +1,23 @@
-
 #include <stdio.h>
 #include "matrix.h"
 
 
 int main(int argc, char** argv){
 
-	matrix* m = initializeMatrix(5,1);
-	matrix* c = initializeMatrix(5,8);
-	matrix* u = initializeMatrix(5,8);
-	printMatrix(m);
+	matrix* m = initializeMatrix(5,2);
+	matrix* c = initializeMatrix(2,8);
+
 	randomizeMatrix(m);
 	printMatrix(m);
-	printMatrix(c);
 	randomizeMatrix(c);
 	printMatrix(c);
-	addMatrix(m, c, u);
+
+	m = mulMatrix(m, c);
+
+	printMatrix(m);
+
 	deleteMatrix(m);
 	deleteMatrix(c);
+
 	return 0;
 }

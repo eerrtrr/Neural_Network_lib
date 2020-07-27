@@ -5,8 +5,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <stdarg.h>
 #include <stdbool.h>
+#include <unistd.h>
+
 
 
 struct MATRIX{
@@ -22,11 +23,13 @@ void deleteMatrix(matrix *m);
 
 void randomizeMatrix(matrix* m);
 
-void addMatrix(matrix* a, matrix* b, ...);
+void addMatrix(matrix* a, matrix* b, matrix* res);
+matrix* mulMatrix(matrix* a, matrix* b);
 
 void printMatrix(matrix* m);
 
 bool sameNumOfRow(matrix* a, matrix* b);
 bool sameNumOfColumn(matrix* a, matrix* b);
 bool mulCompatibility(matrix* a, matrix* b);
+
 #endif
