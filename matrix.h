@@ -9,7 +9,7 @@
 #include <unistd.h>
 
 
-
+//Matrix structure
 struct MATRIX{
 	unsigned int row;
 	unsigned int column;
@@ -18,16 +18,23 @@ struct MATRIX{
 typedef struct MATRIX matrix;
 
 
+//Matrix allocation & desallocation functions
 matrix* initializeMatrix(unsigned int row,unsigned int column);
 void deleteMatrix(matrix *m); 
 
+//Randomize matrix data between -1 & 1
 void randomizeMatrix(matrix* m);
 
-void addMatrix(matrix* a, matrix* b, matrix* res);
-matrix* mulMatrix(matrix* a, matrix* b);
+//Matrix calculus
+matrix* addMatrix(matrix* a, matrix* b, bool res);
+matrix* subMatrix(matrix* a, matrix* b, bool res);
+matrix* mulMatrix(matrix* a, matrix* b, bool res);
+matrix* mulMatScalar(matrix* a, float scalar, bool res);
 
+//Matrix print function
 void printMatrix(matrix* m);
 
+//Matrix size check
 bool sameNumOfRow(matrix* a, matrix* b);
 bool sameNumOfColumn(matrix* a, matrix* b);
 bool mulCompatibility(matrix* a, matrix* b);

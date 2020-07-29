@@ -5,14 +5,14 @@
 int main(int argc, char** argv){
 
 	matrix* m = initializeMatrix(5,2);
-	matrix* c = initializeMatrix(2,8);
+	matrix* c = initializeMatrix(5,2);
 
 	randomizeMatrix(m);
 	printMatrix(m);
 	randomizeMatrix(c);
 	printMatrix(c);
 
-	m = mulMatrix(m, c);
+	subMatrix(m,c,false);
 
 	printMatrix(m);
 
