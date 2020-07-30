@@ -1,12 +1,13 @@
 #include "matrix.h"
 
 
+//A simple fct to allocate memory of the matrix and return a pointer 
 matrix* initializeMatrix(unsigned int row,unsigned int column){
 	matrix* m = malloc(sizeof(matrix));
 
 	if(m == NULL){
 		printf("Matrix memory allocation has failed\n");
-		exit(EXIT_FAILURE);
+		return NULL;
 	}
 
 	m->row = row;	m->column = column;
@@ -19,11 +20,11 @@ matrix* initializeMatrix(unsigned int row,unsigned int column){
 	return m;
 }
 
-
+//Desallocate matrix element by ekement
 void deleteMatrix(matrix *m){
 	if(m == NULL){
 		printf("The matrix is NULL\n");
-		exit(EXIT_FAILURE);
+		return;
 	}
 
 	for(int i=0; i<m->row; i++){
@@ -38,7 +39,7 @@ void deleteMatrix(matrix *m){
 }
 
 
-
+//Randomize matrix data between -1 & 1
 void randomizeMatrix(matrix* m){
 	time_t t;
    	srand((unsigned) time(&t));
@@ -52,7 +53,7 @@ void randomizeMatrix(matrix* m){
    	sleep(1);
 }
 
-
+//Properly print a matrix on the console
 void printMatrix(matrix* m){
 	if(m == NULL){
 		printf("The matrix is NULL\n");
@@ -70,19 +71,23 @@ void printMatrix(matrix* m){
 }
 
 
+//Bool fct, return true if matrixes have the same number of row
 bool sameNumOfRow(matrix* a, matrix* b){
 	return (a->row == b->row);
 }
 
+//Bool fct, return true if matrixes have the same number of column
 bool sameNumOfColumn(matrix* a, matrix* b){
 	return(a->column == b->column);
 }
 
+//Bool fct, return true if matrixes can be multiply
 bool mulCompatibility(matrix* a, matrix* b){
 	return(a->column == b->row);	
 }
 
-
+d
+//Add 2 matrixes
 matrix* addMatrix(matrix* a, matrix* b, bool res){
 	if(a == NULL || b == NULL){
 		printf("Argument()s is/are NULL\n");
@@ -120,7 +125,7 @@ matrix* addMatrix(matrix* a, matrix* b, bool res){
 	}
 }
 
-
+//Substract 2 matrixes
 matrix* subMatrix(matrix* a, matrix* b, bool res){
 	if(a == NULL || b == NULL){
 		printf("\n\nArgument()s is/are NULL\n\n");
@@ -157,7 +162,7 @@ matrix* subMatrix(matrix* a, matrix* b, bool res){
 	}
 }
 
-
+//Multiply 2 matrixes
 matrix* mulMatrix(matrix* a, matrix* b, bool res){
 	if(a == NULL && b == NULL){
 		printf("Argument()s is/are NULL\n");
@@ -207,6 +212,7 @@ matrix* mulMatrix(matrix* a, matrix* b, bool res){
 	}
 }
 
+//Multiply a matrix by a scalar
 matrix* mulMatScalar(matrix* a, float scalar, bool res){
 	if(a == NULL){
 		printf("Argument()s is/are NULL\n");
