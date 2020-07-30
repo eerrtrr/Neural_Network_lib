@@ -86,7 +86,7 @@ bool mulCompatibility(matrix* a, matrix* b){
 	return(a->column == b->row);	
 }
 
-d
+
 //Add 2 matrixes
 matrix* addMatrix(matrix* a, matrix* b, bool res){
 	if(a == NULL || b == NULL){
