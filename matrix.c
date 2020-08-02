@@ -1,6 +1,9 @@
 #include "matrix.h"
 
 
+//MEMORY ALLOCATION & DESALLOCATION//
+
+
 //A simple fct to allocate memory of the matrix and return a pointer 
 matrix* initializeMatrix(unsigned int row,unsigned int column){
 	matrix* m = malloc(sizeof(matrix));
@@ -39,6 +42,9 @@ void deleteMatrix(matrix *m){
 }
 
 
+//RANDOMIZE//
+
+
 //Randomize matrix data between -1 & 1
 void randomizeMatrix(matrix* m){
 	time_t t;
@@ -52,6 +58,10 @@ void randomizeMatrix(matrix* m){
 
    	sleep(1);
 }
+
+
+//PRINT MATRIX//
+
 
 //Properly print a matrix on the console
 void printMatrix(matrix* m){
@@ -71,6 +81,9 @@ void printMatrix(matrix* m){
 }
 
 
+//ARRAY & MATRIX CONVERTION
+
+
 matrix* fromArray(float arr[]){
 	int length = sizeof(&arr)/sizeof(float);
 	matrix* m = initializeMatrix(length, 1);
@@ -80,6 +93,29 @@ matrix* fromArray(float arr[]){
 
 	return m;
 }
+
+
+float* toArray(matrix* m){
+	if(m == NULL){
+		printf("Arguments are NULL\n");
+		return NULL;
+	}
+	else if(m->column != 1){
+		printf("Matrix argument can only have 1 column\n");
+		return NULL;
+	}
+
+	float* arr = malloc(m->row*sizeof(float));
+	for(int i=0; i<m->row; i++){
+		arr[i] = m->data[i][0];
+	}
+
+	return arr;
+}
+
+
+//USEFULL FUNCTION//
+
 
 //Bool fct, return true if matrixes have the same number of row
 bool sameNumOfRow(matrix* a, matrix* b){
@@ -95,6 +131,11 @@ bool sameNumOfColumn(matrix* a, matrix* b){
 bool mulCompatibility(matrix* a, matrix* b){
 	return(a->column == b->row);	
 }
+
+
+
+//CALCULUS//
+
 
 
 //Add 2 matrixes

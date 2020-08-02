@@ -36,6 +36,7 @@ void printMatrix(matrix* m);
 
 //Convertion between array and matrix
 matrix* fromArray(float arr[]);
+float* toArray(matrix* m);
 
 //Matrix size check
 bool sameNumOfRow(matrix* a, matrix* b);

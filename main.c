@@ -3,15 +3,10 @@
 
 int main(int argc, char** argv){
 	float inputDatas_arr[] = {2,9};
+	float target_arr[] = {1};
 	neuralNetwork* nn = initializeNeuralNetwork(2,2,1);
-	printMatrix(nn->weights_ih);
-	printMatrix(nn->bias_h);
-	printMatrix(nn->weights_ho);
-	printMatrix(nn->bias_o);
 
-	feedForward(nn, inputDatas_arr);
-
-	deleteNeuralNetwork(nn);
+	train(inputDatas_arr, target_arr, nn);
 
 	return 0;
 }

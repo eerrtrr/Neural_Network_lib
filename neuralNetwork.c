@@ -1,6 +1,9 @@
 #include "neuralNetwork.h"
 #include <math.h>
 
+
+
+//Memory allocation and desallocation
 neuralNetwork* initializeNeuralNetwork(unsigned short int input_nodes,unsigned short int hidden_nodes, unsigned short int output_nodes){
 	neuralNetwork* nn = malloc(sizeof(neuralNetwork));
 	if(nn == NULL){
@@ -39,6 +42,9 @@ void deleteNeuralNetwork(neuralNetwork* nn){
 	nn = NULL;
 }
 
+
+
+//Map function to apply a fct to every element of data matrix
 void map(matrix* m, float (*f)(float)){
 	if(m == NULL){
 		printf("Argument are NULL");
@@ -53,37 +59,57 @@ void map(matrix* m, float (*f)(float)){
 }
 
 
-void feedForward(neuralNetwork* nn, float inputDatas_arr[]){
+
+//Feedforwarding algorithm
+matrix* feedForward(neuralNetwork* nn, float inputDatas_arr[]){
 	if(nn == NULL){
 		printf("\nArguments are NULL\n");
-		return;
+		return NULL;
 	}
-
+	
+	//Convert array input into matrix
 	matrix* inputDatas = fromArray(inputDatas_arr);
+	printf("Input datas are : \n");
 	printMatrix(inputDatas);
 
+	//feedforward the datas throw the network
 	matrix* hidden = mulMatrix(nn->weights_ih, inputDatas, true);
-	printMatrix(hidden);
 	addMatrix(hidden, nn->bias_h, false);
-	printMatrix(hidden);
 	map(hidden, sigmoid);
+	printf("Hidden datas are : \n");
 	printMatrix(hidden);
 
 	matrix* output = mulMatrix(nn->weights_ho, hidden, true);
-	printMatrix(output);
 	addMatrix(output, nn->bias_o, false);
-	printMatrix(output);
 	map(output, sigmoid);
+	printf("Output datas are : \n");
 	printMatrix(output);
+
+	//Sending back to the caller
+	return output;
 }
 
 
-void printOutput(neuralNetwork* nn){
-	for(int i=0; i<nn->output_nodes; i++){
 
-	}
+//Training network algorithm
+void train(float inputDatas_arr[], float target_arr[], neuralNetwork* nn){
+		matrix* output = feedForward(nn, inputDatas_arr);
+
+		//Convert into matrix
+		matrix* target = fromArray(target_arr);
+		printf("Target matrix is : \n");
+		printMatrix(target);
+
+		//Error = target - output
+		matrix* error = subMatrix(target, output, true);
+		printf("Matrix error is :  \n");
+		printMatrix(error);
 }
 
+
+
+
+//Activation functions
 float sigmoid(float nbr){
 	return (float)1/(1+exp(-1*nbr));
 }
