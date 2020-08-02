@@ -71,6 +71,16 @@ void printMatrix(matrix* m){
 }
 
 
+matrix* fromArray(float arr[]){
+	int length = sizeof(&arr)/sizeof(float);
+	matrix* m = initializeMatrix(length, 1);
+	for(int i=0; i<m->row; i++){
+		m->data[i][0] = arr[i];
+	}
+
+	return m;
+}
+
 //Bool fct, return true if matrixes have the same number of row
 bool sameNumOfRow(matrix* a, matrix* b){
 	return (a->row == b->row);

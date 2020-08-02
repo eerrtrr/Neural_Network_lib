@@ -1,23 +1,17 @@
 #include <stdio.h>
-#include "matrix.h"
-
+#include "neuralNetwork.h"
 
 int main(int argc, char** argv){
+	float inputDatas_arr[] = {2,9};
+	neuralNetwork* nn = initializeNeuralNetwork(2,2,1);
+	printMatrix(nn->weights_ih);
+	printMatrix(nn->bias_h);
+	printMatrix(nn->weights_ho);
+	printMatrix(nn->bias_o);
 
-	matrix* m = initializeMatrix(5,2);
-	matrix* c = initializeMatrix(5,2);
+	feedForward(nn, inputDatas_arr);
 
-	randomizeMatrix(m);
-	printMatrix(m);
-	randomizeMatrix(c);
-	printMatrix(c);
-
-	subMatrix(m,c,false);
-
-	printMatrix(m);
-
-	deleteMatrix(m);
-	deleteMatrix(c);
+	deleteNeuralNetwork(nn);
 
 	return 0;
 }

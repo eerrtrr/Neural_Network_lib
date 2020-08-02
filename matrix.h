@@ -34,6 +34,9 @@ matrix* mulMatScalar(matrix* a, float scalar, bool res);
 //Matrix print function
 void printMatrix(matrix* m);
 
+//Convertion between array and matrix
+matrix* fromArray(float arr[]);
+
 //Matrix size check
 bool sameNumOfRow(matrix* a, matrix* b);
 bool sameNumOfColumn(matrix* a, matrix* b);
